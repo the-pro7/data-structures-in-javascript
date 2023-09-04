@@ -23,6 +23,19 @@ class SinglyLinkedList {
 
         return current
     }
+
+    removeHead() {
+        this.head = this.head.next
+        this.length--
+    }
+
+    insertAtIndex(index, data) {
+        if (index === 0) return this.insertAtHead(data)
+        let prev = this.getByIndex(index - 1)
+        if (prev === null || (index > this.length || index < 0)) return null
+        prev.next = new SinglyLinkedListNode(data, prev.next)
+        this.length++
+    }
 }
 
 // Linked list node
@@ -31,6 +44,15 @@ class SinglyLinkedListNode {
 		this.data = data;
 		this.next = next;
 	}
+}
+
+// Helper function
+SinglyLinkedList.fromValues = (...values) => {
+    let sll = new SinglyLinkedList()
+    for (let i = values.length -1; i >  0; i--) {
+        sll.insertAtHead(values[i])
+    }
+    return sll
 }
 
 module.exports = SinglyLinkedList
